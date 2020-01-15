@@ -1,0 +1,167 @@
+C:\Users\Mukesh Meena> python -m django --version #check for django version
+
+D:\myweb> django-admin  startproject myweb
+cd .\PycharmProjects\django #use for go on project
+PS C:\Users\Mukesh Meena\PycharmProjects\django> django-admin
+PS C:\Users\Mukesh Meena\PycharmProjects\django> cd .\\mysite #also go for project# path copy and pest
+ls #use for  project detail
+
+#project detail-
+...........................
+__init__ its only pblank file
+settingby.pf-use for setting
+.........................s....
+secreatkey -use for security
+debug=true
+
+
+
+url.py-use for url defination--:
+
+wsgi.py- use for web services hosting-:
+manage.py-
+ python manage.py runserver #use for getting server detail for website
+
+webservis-
+frontend-html,css,javascript use for web.
+
+
+##########3code for fipline-:
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('',view.index, name='index'),
+    path('removefunc',view.removefunc, name='removefunc'),
+    path('removecap1',view.removecap, name='removecap'),
+    path('town',view.town111, name='town111'),
+]
+
+and
+def index(request):
+    return HttpResponse("hi baby ")
+
+def removefunc(request):
+    return HttpResponse("hi baby removefunc")
+
+def removecap(request):
+    return HttpResponse("hi baby  capti")
+def town111(request):
+    return HttpResponse("hi baby-town111 ")
+
+backend-python,php,.net-which infrmation send for requirment
+
+# i have created this file==VIEW:
+
+from django.http import HttpResponse
+
+def index(request):
+    return HttpResponse("hello MUKESH")
+##AND ALSO REQUIRED PATH-: in url.py file
+from django.contrib import admin
+from django.urls import path
+from.import view
+
+path('',view.index, name='index')
+
+###navigator-app
+return HttpResponse( '''<h1>harry</h1> <a href="https://github.com/mukesh1991">gihub mukeshmeena1991</a>''')
+
+utilities code
+Views.py
+.......................................................................................................................
+# I have created this file - Harry
+from django.http import HttpResponse
+from django.shortcuts import render
+
+
+def index(request):
+    return render(request, 'index.html')
+
+    # return HttpResponse("Home")
+
+
+
+def analyze(request):
+    #Get the text
+    djtext = request.GET.get('text', 'default')
+
+    # Check checkbox values
+    removepunc = request.GET.get('removepunc', 'off')
+    fullcaps = request.GET.get('fullcaps', 'off')
+    newlineremover = request.GET.get('newlineremover', 'off')
+    extraspaceremover = request.GET.get('extraspaceremover', 'off')
+
+    #Check which checkbox is on
+    if removepunc == "on":
+        punctuations = '''!()-[]{};:'"\,<>./?@#$%^&*_~'''
+        analyzed = ""
+        for char in djtext:
+            if char not in punctuations:
+                analyzed = analyzed + char
+        params = {'purpose':'Removed Punctuations', 'analyzed_text': analyzed}
+        return render(request, 'analyze.html', params)
+
+    else:
+        return HttpResponse("Error")
+
+# def capfirst(request):
+#     return HttpResponse("capitalize first")
+#
+# def newlineremove(request):
+#     return HttpResponse("newline remove first")
+#
+#
+# def spaceremove(request):
+#     return HttpResponse("space remover back")
+#
+# def charcount(request):
+#     return HttpResponse("charcount ")
+
+url.py-
+........................................................................................................
+from django.contrib import admin
+from django.urls import path
+from.import views
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', views.index, name='index'),
+    path('analyze', views.analyze, name='analyze')
+]
+index.html-
+..........................................................................................................
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Text Utils</title>
+</head>
+<body>
+<h1>Welcome to the text analyzer. Enter your text below</h1>
+<form action='/analyze' method='get'>
+    <textarea name='text' style='margin: 0px; width: 721px; height: 93px;'></textarea><br>
+
+    <input type="checkbox" name="removepunc"> Remove Punctuations<br>
+    <button type='submit'> Analyze Text</button>
+
+</form>
+</body>
+
+analyze.html-
+............................................................................................................
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Analyzing Your Text...</title>
+</head>
+<body>
+<h1>Your Analyzed Text - {{ purpose }}</h1>
+<p>
+    {{ analyzed_text }}
+
+</p>
+</body>
+</html>
+
+
